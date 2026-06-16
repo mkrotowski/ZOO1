@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>ZOO – Gemini Nano</title>
+<title>ZOO – AI</title>
 
 <style>
     body { font-family: Arial, sans-serif; margin: 0; background: #e9ecff; }
@@ -44,7 +44,7 @@
     }
     .msg-user { color: #4a6cf7; margin-bottom: 10px; font-weight: bold; }
     .msg-ai { color: #0a8a2a; margin-bottom: 10px; }
-    input[type="text"] {
+    input[type="text"], input[type="password"] {
         padding: 10px; width: 320px; border-radius: 8px;
         border: 1px solid #aaa; font-size: 15px;
     }
@@ -54,13 +54,16 @@
         transition: 0.2s; font-size: 15px;
     }
     button:hover { background: #3a56c9; }
-    #status { font-size: 13px; color: #555; margin: 0 20px 10px 20px; }
 </style>
 </head>
 <body>
 
-<header>🐾 ZOO – Gemini Nano (on‑device)</header>
-<p id="status">Ładowanie Gemini Nano…</p>
+<header>🐾 ZOO – AI (Groq + LLaMA 70B)</header>
+
+<div style="padding: 15px;">
+    Klucz API Groq:
+    <input type="password" id="apiKey" placeholder="sk-groq-...">
+</div>
 
 <div id="wrapper">
 
@@ -82,11 +85,50 @@
             <span>🐅 Tygrys</span>
         </div>
 
+        <div class="animal" data-name="Żyrafa">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Giraffe_standing.jpg">
+            <span>🦒 Żyrafa</span>
+        </div>
+
         <div class="animal" data-name="Pingwin">
             <img src="https://karmasz.pl/wp-content/uploads/2025/01/ile-zyje-pingwin.jpg">
             <span>🐧 Pingwin</span>
         </div>
-    </div>
+
+        <div class="animal" data-name="Hipopotam">
+            <img src="https://th.bing.com/th/id/R.48948dc8c0ab28df617446066005d32a?rik=ulcTFaFMufLyhA&pid=ImgRaw&r=0">
+            <span>🦛 Hipopotam</span>
+        </div>
+
+        <div class="animal" data-name="Panda">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Grosser_Panda.JPG">
+            <span>🐼 Panda</span>
+        </div>
+
+        <div class="animal" data-name="Wilk">
+            <img src="https://samorzad.gov.pl/photo/format/d102f523-2820-4000-8558-70a825871811/resolution/1920x810">
+            <span>🐺 Wilk</span>
+        </div>
+
+        <div class="animal" data-name="Kangur">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Kangaroo_Australia_01_11_2008_-_retouch.JPG">
+            <span>🦘 Kangur</span>
+        </div>
+
+        <div class="animal" data-name="Lis">
+            <img src="https://www.tapeciarnia.pl/tapety/normalne/tapeta-lezacy-lis-w-trawie.jpg">
+            <span>🦊 Lis</span>
+        </div>
+
+        <div class="animal" data-name="Małpa">
+            <img src="https://v.wpimg.pl/Mzg3NWRlYhsGUThkfRdvDkUJbD47TmFYEhF0dX1df0JXS2ExOwAoCAJDIXk1HjgKBkQ-eSIAYhsXWmEhY0MpExRDIjYrQygXBVYqeGBYfRhUAn1mfw98GV8eejU3VWAYVgV4emBeK0lfBHszNwl4TEVO">
+            <span>🐒 Małpa</span>
+        </div>
+
+        <div class="animal" data-name="Niedźwiedź">
+            <img src="https://tapety.tja.pl/obrazki/tja_normalne/225941.jpg">
+            <span>🐻 Niedźwiedź</span>
+        </div>
 
     <div id="chat">
         <h3>Chat o zwierzętach</h3>
@@ -157,7 +199,6 @@ async function ask() {
     }
 }
 </script>
-
 
 </body>
 </html>
