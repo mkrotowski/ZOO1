@@ -92,16 +92,19 @@
     }
 
     .msg-user { color: #4a6cf7; margin-bottom: 10px; font-weight: bold; }
-    .msg-ai { color: #0a8a2a; margin-bottom: 10px; }
+    .msg-ai { color: #0a8a2a; margin-bottom: 10px; white-space: pre-wrap; }
+    .msg-system { color: #666; margin-bottom: 10px; font-size: 13px; }
 
-    #apiBox {
-        margin: 10px 20px;
-        font-size: 14px;
+    #controls {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-top: 8px;
     }
 
-    input[type="text"], input[type="password"] {
+    input[type="text"] {
         padding: 10px;
-        width: 320px;
+        width: calc(100% - 140px);
         border-radius: 8px;
         border: 1px solid #aaa;
         font-size: 15px;
@@ -118,19 +121,30 @@
         font-size: 15px;
     }
 
-    button:hover {
+    button[disabled] {
+        opacity: 0.6;
+        cursor: default;
+    }
+
+    button:hover:not([disabled]) {
         background: #3a56c9;
+    }
+
+    #status {
+        margin-left: 8px;
+        font-size: 13px;
+        color: #333;
+    }
+
+    .small {
+        font-size: 13px;
+        color: #666;
     }
 </style>
 </head>
 <body>
 
 <header>🐾 ZOO – Gemini AI</header>
-
-<div id="apiBox">
-    Twój klucz API Gemini:
-    <input type="password" id="apiKey" placeholder="np. AIzaSy...">
-</div>
 
 <div id="wrapper">
 
@@ -139,62 +153,62 @@
         <h3>Lista zwierząt</h3>
 
         <div class="animal" data-name="Lew">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg" alt="Lew">
             <span>🦁 Lew</span>
         </div>
 
         <div class="animal" data-name="Słoń">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg" alt="Słoń">
             <span>🐘 Słoń</span>
         </div>
 
         <div class="animal" data-name="Tygrys">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg" alt="Tygrys">
             <span>🐅 Tygrys</span>
         </div>
 
         <div class="animal" data-name="Żyrafa">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Giraffe_standing.jpg">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Giraffe_standing.jpg" alt="Żyrafa">
             <span>🦒 Żyrafa</span>
         </div>
 
         <div class="animal" data-name="Pingwin">
-            <img src="https://karmasz.pl/wp-content/uploads/2025/01/ile-zyje-pingwin.jpg">
+            <img src="https://karmasz.pl/wp-content/uploads/2025/01/ile-zyje-pingwin.jpg" alt="Pingwin">
             <span>🐧 Pingwin</span>
         </div>
 
         <div class="animal" data-name="Hipopotam">
-            <img src="https://th.bing.com/th/id/R.48948dc8c0ab28df617446066005d32a?rik=ulcTFaFMufLyhA&pid=ImgRaw&r=0">
+            <img src="https://th.bing.com/th/id/R.48948dc8c0ab28df617446066005d32a?rik=ulcTFaFMufLyhA&pid=ImgRaw&r=0" alt="Hipopotam">
             <span>🦛 Hipopotam</span>
         </div>
 
         <div class="animal" data-name="Panda">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Grosser_Panda.JPG">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Grosser_Panda.JPG" alt="Panda">
             <span>🐼 Panda</span>
         </div>
 
         <div class="animal" data-name="Wilk">
-            <img src="https://samorzad.gov.pl/photo/format/d102f523-2820-4000-8558-70a825871811/resolution/1920x810">
+            <img src="https://samorzad.gov.pl/photo/format/d102f523-2820-4000-8558-70a825871811/resolution/1920x810" alt="Wilk">
             <span>🐺 Wilk</span>
         </div>
 
         <div class="animal" data-name="Kangur">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Kangaroo_Australia_01_11_2008_-_retouch.JPG">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Kangaroo_Australia_01_11_2008_-_retouch.JPG" alt="Kangur">
             <span>🦘 Kangur</span>
         </div>
 
         <div class="animal" data-name="Lis">
-            <img src="https://www.tapeciarnia.pl/tapety/normalne/tapeta-lezacy-lis-w-trawie.jpg">
+            <img src="https://www.tapeciarnia.pl/tapety/normalne/tapeta-lezacy-lis-w-trawie.jpg" alt="Lis">
             <span>🦊 Lis</span>
         </div>
 
         <div class="animal" data-name="Małpa">
-            <img src="https://v.wpimg.pl/Mzg3NWRlYhsGUThkfRdvDkUJbD47TmFYEhF0dX1df0JXS2ExOwAoCAJDIXk1HjgKBkQ-eSIAYhsXWmEhY0MpExRDIjYrQygXBVYqeGBYfRhUAn1mfw98GV8eejU3VWAYVgV4emBeK0lfBHszNwl4TEVO">
+            <img src="https://v.wpimg.pl/Mzg3NWRlYhsGUThkfRdvDkUJbD47TmFYEhF0dX1df0JXS2ExOwAoCAJDIXk1HjgKBkQ-eSIAYhsXWmEhY0MpExRDIjYrQygXBVYqeGBYfRhUAn1mfw98GV8eejU3VWAYVgV4emBeK0lfBHszNwl4TEVO" alt="Małpa">
             <span>🐒 Małpa</span>
         </div>
 
         <div class="animal" data-name="Niedźwiedź">
-            <img src="https://tapety.tja.pl/obrazki/tja_normalne/225941.jpg">
+            <img src="https://tapety.tja.pl/obrazki/tja_normalne/225941.jpg" alt="Niedźwiedź">
             <span>🐻 Niedźwiedź</span>
         </div>
 
@@ -203,22 +217,44 @@
     <!-- CHAT -->
     <div id="chat">
         <h3>Chat o zwierzętach</h3>
-        <div id="messages"></div>
+        <div id="messages" aria-live="polite"></div>
 
-        <input type="text" id="question" placeholder="Zadaj pytanie...">
-        <button onclick="ask()">Wyślij</button>
+        <div id="controls">
+            <input type="text" id="question" placeholder="Zadaj pytanie... (Enter = wyślij)">
+            <button id="askBtn">Wyślij</button>
+            <button id="healthBtn" title="Sprawdź czy serwer proxy działa">Sprawdź serwer</button>
+            <span id="status" class="small">Gotowy</span>
+        </div>
+
+        <div class="small" style="margin-top:8px">
+            Uwaga: klucz API powinien być przechowywany na serwerze. Ten klient wysyła zapytania do endpointu <code>/ask</code>.
+        </div>
     </div>
 
 </div>
 
 <script>
+/*
+  Zmiany i ulepszenia:
+  - Retry z backoffem i timeout (AbortController)
+  - Wyświetlanie statusu i szczegółów błędów
+  - Blokowanie przycisku podczas oczekiwania
+  - Obsługa Enter w polu tekstowym
+  - Health check endpointu /health
+*/
+
 const animals = document.querySelectorAll(".animal");
 const messages = document.getElementById("messages");
+const askBtn = document.getElementById("askBtn");
+const healthBtn = document.getElementById("healthBtn");
+const statusEl = document.getElementById("status");
+const questionInput = document.getElementById("question");
 
 animals.forEach(a => {
     a.addEventListener("click", () => {
         const name = a.dataset.name;
-        document.getElementById("question").value = "Opowiedz mi o zwierzęciu: " + name;
+        questionInput.value = "Opowiedz mi o zwierzęciu: " + name;
+        questionInput.focus();
     });
 });
 
@@ -230,24 +266,135 @@ function addMessage(text, cls) {
     messages.scrollTop = messages.scrollHeight;
 }
 
-async function ask() {
-  const question = document.getElementById("question").value;
-  if (!question.trim()) return;
-  addMessage("Ty: " + question, "msg-user");
+function setStatus(text, isError = false) {
+    statusEl.textContent = text;
+    statusEl.style.color = isError ? "#b00020" : "#333";
+}
 
+// helper: fetch z timeout
+async function fetchWithTimeout(url, opts = {}, timeoutMs = 15000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const r = await fetch("/ask", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question })
-    });
-    const j = await r.json();
-    addMessage("AI: " + (j.answer || "Brak odpowiedzi"), "msg-ai");
-  } catch (e) {
-    addMessage("AI: Błąd połączenia z serwerem.", "msg-ai");
-    console.error(e);
+    const resp = await fetch(url, { ...opts, signal: controller.signal });
+    clearTimeout(id);
+    return resp;
+  } catch (err) {
+    clearTimeout(id);
+    throw err;
   }
 }
+
+// helper: retry z prostym backoffem
+async function postWithRetry(url, body, attempts = 3, baseDelay = 300) {
+  let lastErr;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      const resp = await fetchWithTimeout(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      }, 15000);
+      return resp;
+    } catch (err) {
+      lastErr = err;
+      // exponential backoff
+      const delay = baseDelay * Math.pow(2, i);
+      await new Promise(r => setTimeout(r, delay));
+    }
+  }
+  throw lastErr;
+}
+
+async function ask() {
+  const question = questionInput.value.trim();
+  if (!question) return;
+
+  addMessage("Ty: " + question, "msg-user");
+  setStatus("Wysyłanie...", false);
+  askBtn.disabled = true;
+
+  try {
+    const resp = await postWithRetry("/ask", { question }, 3, 300);
+
+    if (!resp.ok) {
+      // spróbuj odczytać body (może być JSON lub tekst)
+      let bodyText;
+      try { bodyText = await resp.text(); } catch { bodyText = "<brak treści>"; }
+      addMessage("AI: Błąd serwera (" + resp.status + ")", "msg-ai");
+      addMessage("Szczegóły: " + bodyText, "msg-system");
+      setStatus("Błąd serwera: " + resp.status, true);
+      console.error("Server error", resp.status, bodyText);
+      return;
+    }
+
+    // parse JSON safely
+    let json;
+    try { json = await resp.json(); } catch (e) {
+      const raw = await resp.text();
+      addMessage("AI: Niepoprawna odpowiedź z serwera", "msg-ai");
+      addMessage("Surowa odpowiedź: " + raw, "msg-system");
+      setStatus("Niepoprawna odpowiedź serwera", true);
+      return;
+    }
+
+    addMessage("AI: " + (json.answer || json.error || "Brak odpowiedzi"), "msg-ai");
+    setStatus("Gotowe", false);
+
+  } catch (err) {
+    // rozróżniamy timeout/abort od innych błędów sieciowych
+    if (err.name === "AbortError") {
+      addMessage("AI: Przekroczono czas oczekiwania na odpowiedź.", "msg-ai");
+      setStatus("Timeout", true);
+    } else {
+      addMessage("AI: Błąd połączenia z serwerem.", "msg-ai");
+      setStatus("Błąd połączenia", true);
+    }
+    console.error("Network error:", err);
+  } finally {
+    askBtn.disabled = false;
+  }
+}
+
+// health check
+async function checkHealth() {
+  setStatus("Sprawdzanie serwera...", false);
+  healthBtn.disabled = true;
+  try {
+    const resp = await fetchWithTimeout("/health", {}, 5000);
+    if (!resp.ok) {
+      setStatus("Serwer nie odpowiada: " + resp.status, true);
+      addMessage("System: Health check zwrócił status " + resp.status, "msg-system");
+    } else {
+      const j = await resp.json().catch(() => null);
+      setStatus("Serwer OK", false);
+      addMessage("System: Serwer proxy działa poprawnie.", "msg-system");
+    }
+  } catch (err) {
+    setStatus("Brak połączenia z serwerem", true);
+    addMessage("System: Nie można połączyć się z serwerem proxy.", "msg-system");
+    console.error("Health check error:", err);
+  } finally {
+    healthBtn.disabled = false;
+  }
+}
+
+// obsługa Enter
+questionInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    ask();
+  }
+});
+
+askBtn.addEventListener("click", ask);
+healthBtn.addEventListener("click", checkHealth);
+
+// opcjonalnie: automatyczny health check przy starcie
+window.addEventListener("load", () => {
+  // nie wywołujemy automatycznie jeśli aplikacja jest offline
+  if (navigator.onLine) checkHealth();
+});
 </script>
 
 </body>
