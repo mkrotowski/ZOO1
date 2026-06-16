@@ -58,7 +58,7 @@
 </head>
 <body>
 
-<header>🐾 ZOO – AI</header>
+<header>🐾 ZOO – AI (Groq + LLaMA 70B)</header>
 
 <div style="padding: 15px;">
     Klucz API Groq:
@@ -138,7 +138,7 @@ async function ask() {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + apiKey,
-                "OpenAI-Beta": "use=groq"   // ← TO JEST KLUCZOWE
+                "OpenAI-Beta": "use=groq"
             },
             body: JSON.stringify({
                 model: "llama3-70b-8192",
