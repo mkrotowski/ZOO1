@@ -43,7 +43,8 @@
         padding: 12px; background: #fafafa; border-radius: 8px; margin-bottom: 12px;
     }
     .msg-user { color: #4a6cf7; margin-bottom: 10px; font-weight: bold; }
-    .msg-ai { color: #0a8a2a; margin-bottom: 10px; }
+    .msg-ai { color: #0a8a2a; margin-bottom: 10px; line-height: 1.5; }
+    .msg-error { color: #f85149; margin-bottom: 10px; font-weight: bold; }
     input[type="text"], input[type="password"] {
         padding: 10px; width: 320px; border-radius: 8px;
         border: 1px solid #aaa; font-size: 15px;
@@ -62,7 +63,7 @@
 
 <div style="padding: 15px;">
     Klucz API:
-    <input type="password" id="apiKey" placeholder="...">
+    <input type="password" id="apiKey" placeholder="Wklej klucz Gemini API...">
 </div>
 
 <div id="wrapper">
@@ -115,7 +116,8 @@ animals.forEach(a => {
 function addMessage(text, cls) {
     const div = document.createElement("div");
     div.className = cls;
-    div.textContent = text;
+    // Zmienione na innerHTML, aby obsłużyć przejścia do nowej linii (<br>) tak jak w index.html
+    div.innerHTML = text;
     messages.appendChild(div);
     messages.scrollTop = messages.scrollHeight;
 }
@@ -130,38 +132,41 @@ async function ask() {
     }
     if (!question.trim()) return;
 
-    addMessage("Ty: " + question, "msg-user");
+    // Zabezpieczenie przed HTML Injection (metoda z index.html)
+    const safeQuestion = question.replace(/</g, '&lt;');
+    addMessage("Ty: " + safeQuestion, "msg-user");
+    document.getElementById("question").value = "";
 
-    // Używamy bezpieczniejszego zapisu adresu URL
-    const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + apiKey;
+    // Zmiana modelu na gemini-2.5-flash (wzorowane na index.html)
+    const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + encodeURIComponent(apiKey);
 
     try {
         const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                "contents": [{
-                    "parts": [{ "text": "Jesteś ekspertem od zwierząt. Odpowiadaj po polsku. Pytanie: " + question }]
+                contents: [{
+                    parts: [{ text: "Jesteś ekspertem od zwierząt. Odpowiadaj ciekawie i po polsku. Pytanie: " + question }]
                 }]
             })
         });
 
         const data = await response.json();
 
-        // Sprawdzenie czy API zwróciło błąd wewnątrz JSON
-        if (data.error) {
-            addMessage("AI: Błąd API: " + data.error.message, "msg-ai");
-            console.error(data.error);
-        } else {
-            const answer = data.candidates[0].content.parts[0].text;
-            addMessage("AI: " + answer, "msg-ai");
+        // Pełna weryfikacja statusu odpowiedzi (wzorowane na index.html)
+        if (!response.ok) {
+            throw new Error(data.error?.message || 'Błąd Gemini API');
         }
+
+        // Mapowanie i bezpieczne formatowanie tekstu z obsługą entitów oraz nowej linii
+        let text = data.candidates?.[0]?.content?.parts?.map(p => p.text || '').join('') || 'Brak odpowiedzi';
+        text = text.replace(/</g, '&lt;').replace(/\n/g, '<br>');
+
+        addMessage("AI: " + text, "msg-ai");
 
     } catch (e) {
         console.error(e);
-        addMessage("AI: Błąd połączenia. Sprawdź konsolę.", "msg-ai");
+        addMessage("AI: " + e.message, "msg-error");
     }
 }
 </script>
