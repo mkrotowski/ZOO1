@@ -137,7 +137,8 @@ async function ask() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + apiKey
+                "Authorization": "Bearer " + apiKey,
+                "OpenAI-Beta": "use=groq"   // ← TO JEST KLUCZOWE
             },
             body: JSON.stringify({
                 model: "llama3-70b-8192",
@@ -161,8 +162,7 @@ async function ask() {
         let answer = data?.choices?.[0]?.message?.content;
 
         if (!answer || answer.trim() === "") {
-            answer = "Nie mam pewności, ale wygląda na to, że pytasz o zwierzę. " +
-                     "To zwierzę jest fascynujące i ma wiele ciekawych cech.";
+            answer = "Nie mam pewności, ale wygląda na to, że pytasz o zwierzę.";
         }
 
         addMessage("AI: " + answer, "msg-ai");
