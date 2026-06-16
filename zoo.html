@@ -85,50 +85,11 @@
             <span>🐅 Tygrys</span>
         </div>
 
-        <div class="animal" data-name="Żyrafa">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Giraffe_standing.jpg">
-            <span>🦒 Żyrafa</span>
-        </div>
-
         <div class="animal" data-name="Pingwin">
             <img src="https://karmasz.pl/wp-content/uploads/2025/01/ile-zyje-pingwin.jpg">
             <span>🐧 Pingwin</span>
         </div>
-
-        <div class="animal" data-name="Hipopotam">
-            <img src="https://th.bing.com/th/id/R.48948dc8c0ab28df617446066005d32a?rik=ulcTFaFMufLyhA&pid=ImgRaw&r=0">
-            <span>🦛 Hipopotam</span>
-        </div>
-
-        <div class="animal" data-name="Panda">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Grosser_Panda.JPG">
-            <span>🐼 Panda</span>
-        </div>
-
-        <div class="animal" data-name="Wilk">
-            <img src="https://samorzad.gov.pl/photo/format/d102f523-2820-4000-8558-70a825871811/resolution/1920x810">
-            <span>🐺 Wilk</span>
-        </div>
-
-        <div class="animal" data-name="Kangur">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Kangaroo_Australia_01_11_2008_-_retouch.JPG">
-            <span>🦘 Kangur</span>
-        </div>
-
-        <div class="animal" data-name="Lis">
-            <img src="https://www.tapeciarnia.pl/tapety/normalne/tapeta-lezacy-lis-w-trawie.jpg">
-            <span>🦊 Lis</span>
-        </div>
-
-        <div class="animal" data-name="Małpa">
-            <img src="https://v.wpimg.pl/Mzg3NWRlYhsGUThkfRdvDkUJbD47TmFYEhF0dX1df0JXS2ExOwAoCAJDIXk1HjgKBkQ-eSIAYhsXWmEhY0MpExRDIjYrQygXBVYqeGBYfRhUAn1mfw98GV8eejU3VWAYVgV4emBeK0lfBHszNwl4TEVO">
-            <span>🐒 Małpa</span>
-        </div>
-
-        <div class="animal" data-name="Niedźwiedź">
-            <img src="https://tapety.tja.pl/obrazki/tja_normalne/225941.jpg">
-            <span>🐻 Niedźwiedź</span>
-        </div>
+    </div>
 
     <div id="chat">
         <h3>Chat o zwierzętach</h3>
@@ -184,9 +145,8 @@ async function ask() {
                     {
                         role: "system",
                         content:
-"Jesteś ekspertem od zwierząt. Odpowiadaj zawsze pełnym zdaniem, po polsku. " +
-"Jeśli użytkownik pyta o zwierzę, opisz je ciekawie i konkretnie. " +
-"Jeśli pytanie jest niejasne, zgadnij najlepszą możliwą interpretację i odpowiedz."
+"Jesteś ekspertem od zwierząt. Odpowiadaj zawsze po polsku, pełnymi zdaniami. " +
+"Jeśli pytanie dotyczy zwierzęcia, opisz je ciekawie i konkretnie."
                     },
                     { role: "user", content: question }
                 ],
@@ -202,8 +162,7 @@ async function ask() {
 
         if (!answer || answer.trim() === "") {
             answer = "Nie mam pewności, ale wygląda na to, że pytasz o zwierzę. " +
-                     "Małpy to inteligentne ssaki naczelne, żyjące w lasach tropikalnych. " +
-                     "Są społeczne, używają narzędzi i mają złożone zachowania.";
+                     "To zwierzę jest fascynujące i ma wiele ciekawych cech.";
         }
 
         addMessage("AI: " + answer, "msg-ai");
