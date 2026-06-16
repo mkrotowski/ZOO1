@@ -5,146 +5,62 @@
 <title>ZOO – Gemini Nano</title>
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: #e9ecff;
-    }
-
+    body { font-family: Arial, sans-serif; margin: 0; background: #e9ecff; }
     header {
         background: linear-gradient(90deg, #4a6cf7, #6a8bff);
-        color: white;
-        padding: 25px;
-        text-align: center;
-        font-size: 32px;
-        font-weight: bold;
-        letter-spacing: 1px;
+        color: white; padding: 25px; text-align: center;
+        font-size: 32px; font-weight: bold; letter-spacing: 1px;
         box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     }
-
-    #wrapper {
-        display: flex;
-        padding: 20px;
-        gap: 20px;
-    }
-
+    #wrapper { display: flex; padding: 20px; gap: 20px; }
     #animals {
-        width: 32%;
-        background: white;
-        padding: 20px;
-        border-radius: 14px;
+        width: 32%; background: white; padding: 20px; border-radius: 14px;
         box-shadow: 0 0 15px rgba(0,0,0,0.15);
         background: linear-gradient(180deg, #ffffff, #eef2ff);
     }
-
-    #animals h3 {
-        margin-top: 0;
-        font-size: 22px;
-        color: #4a6cf7;
-        text-align: center;
-    }
-
+    #animals h3 { margin-top: 0; font-size: 22px; color: #4a6cf7; text-align: center; }
     .animal {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 12px;
-        margin: 10px 0;
-        background: #ffffff;
-        border: 1px solid #d0d7ff;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: 0.25s;
+        display: flex; align-items: center; gap: 12px;
+        padding: 12px; margin: 10px 0; background: #ffffff;
+        border: 1px solid #d0d7ff; border-radius: 12px;
+        cursor: pointer; transition: 0.25s;
     }
-
     .animal:hover {
         transform: scale(1.05);
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         background: #f5f7ff;
     }
-
     .animal img {
-        width: 70px;
-        height: 70px;
-        border-radius: 10px;
-        object-fit: cover;
-        border: 2px solid #4a6cf7;
+        width: 70px; height: 70px; border-radius: 10px;
+        object-fit: cover; border: 2px solid #4a6cf7;
     }
-
     #chat {
-        width: 68%;
-        background: white;
-        padding: 20px;
-        border-radius: 14px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.15);
+        width: 68%; background: white; padding: 20px;
+        border-radius: 14px; box-shadow: 0 0 15px rgba(0,0,0,0.15);
     }
-
     #messages {
-        height: 320px;
-        overflow-y: auto;
-        border: 1px solid #ccc;
-        padding: 12px;
-        background: #fafafa;
-        border-radius: 8px;
-        margin-bottom: 12px;
+        height: 320px; overflow-y: auto; border: 1px solid #ccc;
+        padding: 12px; background: #fafafa; border-radius: 8px; margin-bottom: 12px;
     }
-
     .msg-user { color: #4a6cf7; margin-bottom: 10px; font-weight: bold; }
     .msg-ai { color: #0a8a2a; margin-bottom: 10px; }
-
     input[type="text"] {
-        padding: 10px;
-        width: 320px;
-        border-radius: 8px;
-        border: 1px solid #aaa;
-        font-size: 15px;
+        padding: 10px; width: 320px; border-radius: 8px;
+        border: 1px solid #aaa; font-size: 15px;
     }
-
     button {
-        padding: 10px 18px;
-        border: none;
-        background: #4a6cf7;
-        color: white;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: 0.2s;
-        font-size: 15px;
+        padding: 10px 18px; border: none; background: #4a6cf7;
+        color: white; border-radius: 8px; cursor: pointer;
+        transition: 0.2s; font-size: 15px;
     }
-
-    button:hover {
-        background: #3a56c9;
-    }
+    button:hover { background: #3a56c9; }
+    #status { font-size: 13px; color: #555; margin: 0 20px 10px 20px; }
 </style>
-
-<!-- ŁADOWANIE GEMINI NANO -->
-<script type="module">
-import { pipeline } from "https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.1";
-
-let model = null;
-
-async function loadModel() {
-    model = await pipeline("text-generation", "Xenova/gpt2");
-    console.log("Gemini Nano (wersja demo GPT2) załadowany!");
-}
-
-window.addEventListener("load", loadModel);
-
-window.generateAnswer = async function(question) {
-    if (!model) return "Model jeszcze się ładuje...";
-
-    const output = await model(question, {
-        max_new_tokens: 80,
-        temperature: 0.7
-    });
-
-    return output[0].generated_text;
-};
-</script>
-
 </head>
 <body>
 
-<header>🐾 ZOO – Gemini</header>
+<header>🐾 ZOO – Gemini Nano (on‑device)</header>
+<p id="status">Ładowanie Gemini Nano…</p>
 
 <div id="wrapper">
 
@@ -156,19 +72,19 @@ window.generateAnswer = async function(question) {
             <span>🦁 Lew</span>
         </div>
 
+        <div class="animal" data-name="Słoń">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg">
+            <span>🐘 Słoń</span>
+        </div>
+
+        <div class="animal" data-name="Tygrys">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg">
+            <span>🐅 Tygrys</span>
+        </div>
+
         <div class="animal" data-name="Pingwin">
             <img src="https://karmasz.pl/wp-content/uploads/2025/01/ile-zyje-pingwin.jpg">
             <span>🐧 Pingwin</span>
-        </div>
-
-        <div class="animal" data-name="Hipopotam">
-            <img src="https://th.bing.com/th/id/R.48948dc8c0ab28df617446066005d32a?rik=ulcTFaFMufLyhA&pid=ImgRaw&r=0">
-            <span>🦛 Hipopotam</span>
-        </div>
-
-        <div class="animal" data-name="Panda">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Grosser_Panda.JPG">
-            <span>🐼 Panda</span>
         </div>
     </div>
 
@@ -183,8 +99,11 @@ window.generateAnswer = async function(question) {
 </div>
 
 <script>
+let assistant = null;
+
 const animals = document.querySelectorAll(".animal");
 const messages = document.getElementById("messages");
+const statusEl = document.getElementById("status");
 
 animals.forEach(a => {
     a.addEventListener("click", () => {
@@ -201,15 +120,46 @@ function addMessage(text, cls) {
     messages.scrollTop = messages.scrollHeight;
 }
 
+async function initNano() {
+    if (!("ai" in window) || !window.ai?.createGenericAssistant) {
+        statusEl.textContent = "Twoja przeglądarka nie obsługuje jeszcze Gemini Nano (window.ai). Użyj Chrome Canary / Dev z włączonymi flagami.";
+        return;
+    }
+
+    statusEl.textContent = "Ładowanie asystenta Gemini Nano...";
+    try {
+        assistant = await window.ai.createGenericAssistant();
+        statusEl.textContent = "Gemini Nano gotowy ✅";
+    } catch (e) {
+        console.error(e);
+        statusEl.textContent = "Nie udało się zainicjalizować Gemini Nano.";
+    }
+}
+
 async function ask() {
     const question = document.getElementById("question").value;
     if (!question.trim()) return;
 
     addMessage("Ty: " + question, "msg-user");
 
-    const answer = await window.generateAnswer(question);
-    addMessage("AI: " + answer, "msg-ai");
+    if (!assistant) {
+        addMessage("AI: Gemini Nano nie jest dostępny w tej przeglądarce.", "msg-ai");
+        return;
+    }
+
+    try {
+        const answer = await assistant.prompt(
+            "Odpowiadaj po polsku, krótko i konkretnie. " +
+            "Jeśli pytanie dotyczy zwierząt, opowiadaj ciekawostki. Pytanie: " + question
+        );
+        addMessage("AI: " + answer, "msg-ai");
+    } catch (e) {
+        console.error(e);
+        addMessage("AI: Wystąpił błąd podczas generowania odpowiedzi.", "msg-ai");
+    }
 }
+
+window.addEventListener("load", initNano);
 </script>
 
 </body>
