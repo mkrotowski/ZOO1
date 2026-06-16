@@ -232,7 +232,6 @@ function addMessage(text, cls) {
 
 async function ask() {
   const question = document.getElementById("question").value;
-    question += "opowiadaj ciekawie i w miare obszernie ale nie przynudzaj, zastosuj czytelne formatowanie tekstu";
   if (!question.trim()) return;
   addMessage("Ty: " + question, "msg-user");
 
