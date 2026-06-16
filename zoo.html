@@ -244,7 +244,7 @@ async function ask() {
 
     try {
         const response = await fetch(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent" + apiKey,
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + apiKey,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -256,6 +256,7 @@ async function ask() {
 
         if (!response.ok) {
             addMessage("AI: Błąd API (" + response.status + ")", "msg-ai");
+            console.error(await response.text());
             return;
         }
 
@@ -265,6 +266,7 @@ async function ask() {
 
     } catch (e) {
         addMessage("AI: Błąd połączenia z API.", "msg-ai");
+        console.error(e);
     }
 }
 </script>
